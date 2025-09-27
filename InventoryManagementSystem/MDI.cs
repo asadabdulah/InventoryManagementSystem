@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace InventoryManagementSystem
 {
@@ -20,6 +21,29 @@ namespace InventoryManagementSystem
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void MDI_Load(object sender, EventArgs e)
+        {
+            
+
+            string Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if(File.Exists(Path+"\\connect"))
+            {
+                login log = new login();
+                Main.showWindow(log, this);
+            }
+            else
+            {
+                Settings set = new Settings();
+                Main.showWindow(set, this);
+            }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings set = new Settings();
+            Main.showWindow(set, this);
         }
     }
 }
